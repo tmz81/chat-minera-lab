@@ -9,6 +9,7 @@ const App = () => {
   const [mineralDescription, setMineralDescription] = React.useState("");
   const [isLoading, setIsLoading] = React.useState(false);
   const [error, setError] = React.useState("");
+  const inputRef = React.useRef(null);
 
   const generateMineralDescription = async () => {
     setIsLoading(true);
@@ -67,10 +68,11 @@ const App = () => {
         </div>
 
         <div className="w-full flex flex-col items-center">
-          <h3 className="text-lg sm:text-xl font-semibold text-gray-700 mb-4">
+          <h3 className="text-base sm:text-lg font-semibold text-gray-700 mb-4 text-center whitespace-normal break-words">
             ✨ Gerador de Descrição de Mineral ✨
           </h3>
           <input
+            ref={inputRef}
             type="text"
             className="w-full p-3 border border-gray-300 rounded-lg mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500"
             placeholder="Digite o nome do mineral (ex: Quartzo, Caulinita)"
@@ -78,6 +80,7 @@ const App = () => {
             onChange={(e) => setMineralName(e.target.value)}
             onKeyPress={(e) => {
               if (e.key === "Enter") {
+                inputRef.current?.blur();
                 generateMineralDescription();
               }
             }}
