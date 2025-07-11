@@ -1,6 +1,8 @@
 import React from "react";
 import MineralLogo from "./assets/MineralLogo";
 import axios from "axios";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 
 const App = () => {
   const [mineralName, setMineralName] = React.useState("");
@@ -92,7 +94,9 @@ const App = () => {
 
           {mineralDescription && (
             <div className="bg-gray-100 p-4 rounded-lg mt-6 w-full text-gray-800 text-sm sm:text-base leading-relaxed whitespace-pre-wrap shadow-inner">
-              {mineralDescription}
+              <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                {mineralDescription}
+              </ReactMarkdown>
             </div>
           )}
         </div>
