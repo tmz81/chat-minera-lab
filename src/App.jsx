@@ -22,7 +22,7 @@ const App = () => {
     }
 
     try {
-      const prompt = `Forneça uma descrição detalhada do mineral "${mineralName}", focando em suas propriedades físicas, químicas, condições de formação e sua ocorrência e importância em ambientes de solo. Se for um mineral comum em solos, explique brevemente como ele se forma ou se altera. Se não for comum, mencione isso.`;
+      const prompt = `Forneça uma descrição detalhada e bem estruturada do mineral "${mineralName}" com formatação em Markdown. Use títulos com emojis, listas com ícones, destaque conceitos importantes em negrito, e organize as seções: Propriedades Físicas, Químicas, Formação, Ocorrência no Solo, e Resumo Final. A resposta deve ser clara, científica, visualmente atrativa e ideal para exibição em um site educacional.`;
       const chatHistory = [{ role: "user", parts: [{ text: prompt }] }];
       const payload = { contents: chatHistory };
       const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
