@@ -3,6 +3,7 @@ import MineralLogo from "./assets/MineralLogo";
 import axios from "axios";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
+import ThemeToggle from "./components/ThemeToggle"; // 🔥 Aqui importamos
 
 const App = () => {
   const [mineralName, setMineralName] = React.useState("");
@@ -52,29 +53,35 @@ const App = () => {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-blue-50 p-4 sm:p-6 font-sans">
-      <div className="bg-white rounded-xl shadow-lg p-6 sm:p-8 flex flex-col items-center max-w-md w-full">
+    <div className="flex items-center justify-center min-h-screen bg-blue-50 dark:bg-gray-900 text-gray-800 dark:text-gray-100 p-4 sm:p-6 font-sans transition-colors duration-300">
+      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 sm:p-8 flex flex-col items-center max-w-md w-full">
+        {/* Toggle separado */}
+        <ThemeToggle />
+{/* <h1 className="text-2xl font-bold text-blue-600 dark:text-yellow-400">
+  Teste de Tema
+</h1> */}
         <div className="w-32 h-32 sm:w-40 sm:h-40 mb-6 flex items-center justify-center">
           <MineralLogo className="w-24 h-24 mx-auto mb-4" />
         </div>
 
         <div className="text-center mb-6">
-          <h1 className="text-xl sm:text-2xl font-light text-gray-700 leading-tight">
+          <h1 className="text-xl sm:text-2xl font-light leading-tight">
             Laboratório
           </h1>
-          <h2 className="text-2xl sm:text-3xl font-bold text-gray-800 leading-tight -mt-1">
+          <h2 className="text-2xl sm:text-3xl font-bold leading-tight -mt-1">
             Mineralogia do Solo
           </h2>
         </div>
 
         <div className="w-full flex flex-col items-center">
-          <h3 className="text-base sm:text-lg font-semibold text-gray-700 mb-4 text-center whitespace-normal break-words">
-            ✨ Gerador de Descrição de Mineral ✨
+          <h3 className="text-base sm:text-lg font-semibold mb-4 text-center leading-tight">
+            ✨ Gerador de <br className="block sm:hidden" /> Descrição de
+            Mineral ✨
           </h3>
           <input
             ref={inputRef}
             type="text"
-            className="w-full p-3 border border-gray-300 rounded-lg mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg mb-4 bg-white dark:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:text-white"
             placeholder="Digite o nome do mineral (ex: Quartzo, Caulinita)"
             value={mineralName}
             onChange={(e) => setMineralName(e.target.value)}
@@ -93,10 +100,10 @@ const App = () => {
             {isLoading ? "Gerando..." : "Gerar Descrição"}
           </button>
 
-          {error && <p className="text-red-600 mt-4 text-center">{error}</p>}
+          {error && <p className="text-red-400 mt-4 text-center">{error}</p>}
 
           {mineralDescription && (
-            <div className="bg-gray-100 p-4 rounded-lg mt-6 w-full text-gray-800 text-sm sm:text-base leading-relaxed whitespace-pre-wrap shadow-inner">
+            <div className="bg-gray-100 dark:bg-gray-700 p-4 rounded-lg mt-6 w-full text-gray-800 dark:text-gray-100 text-sm sm:text-base leading-relaxed whitespace-pre-wrap shadow-inner">
               <ReactMarkdown remarkPlugins={[remarkGfm]}>
                 {mineralDescription}
               </ReactMarkdown>
